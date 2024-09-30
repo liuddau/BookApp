@@ -1,6 +1,6 @@
 package com.example.BookApp.repo;
 
-import com.example.SimplestCRUDExample.model.Book;
+import com.example.BookApp.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -21,12 +21,12 @@ public class Book {
     private String title;
 
     @Column
-    private int year;
+    private Integer yearOfRelease;
 
     @Column
     private String author;
 
     @Column
-    private double rating;
+    private Double rating;
 
 }
