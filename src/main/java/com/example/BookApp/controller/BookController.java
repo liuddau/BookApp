@@ -99,4 +99,24 @@ public class BookController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("/rateBook/{id}")
+    public ResponseEntity<String> rateBook(@PathVariable Long id, @RequestBody Double rating) {
+        try {
+            if (rating >= 1 && rating <= 5) {
+                Optional<Book> bookData = bookRepository.findById(id);
+                if (bookData.isPresent()) {
+                    Book updatedBookData = bookData.get();
+                    updatedBookData.setRating(rating);
+                    bookRepository.save(updatedBookData);
+                    return new ResponseEntity<>("Rating of book with id [" + id + "] was updated", HttpStatus.CREATED);
+                }
+                return new ResponseEntity<>("Book with id [" + id + "] was not found", HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>("Invalid rating value used. Value should be between 1 and 5",
+                    HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
